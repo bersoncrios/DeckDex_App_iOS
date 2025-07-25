@@ -47,6 +47,8 @@
 		B2A96D492E33078100D23ECF = {
 			isa = PBXGroup;
 			children = (
+				B28B6A8C2E33216C000DA55D /* README.md */,
+				B28B6A8D2E332191000DA55D /* LICENSE */,
 				B2A96D542E33078100D23ECF /* Dexdeck */,
 				B2A96D532E33078100D23ECF /* Products */,
 			);
@@ -71,8 +73,6 @@
 				B2A96D5E2E33078600D23ECF /* Assets.xcassets */,
 				B2A96D602E33078600D23ECF /* LaunchScreen.storyboard */,
 				B2A96D632E33078600D23ECF /* Info.plist */,
-				B28B6A8C2E33216C000DA55D /* README.md */,
-				B28B6A8D2E332191000DA55D /* LICENSE */,
 			);
 			path = Dexdeck;
 			sourceTree = "<group>";
