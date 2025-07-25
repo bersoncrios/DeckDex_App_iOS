@@ -7,23 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B28B6A8E2E332191000DA55D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B28B6A8D2E332191000DA55D /* LICENSE */; };
 		B2A96D562E33078100D23ECF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A96D552E33078100D23ECF /* AppDelegate.swift */; };
 		B2A96D582E33078100D23ECF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A96D572E33078100D23ECF /* SceneDelegate.swift */; };
 		B2A96D5A2E33078100D23ECF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A96D592E33078100D23ECF /* ViewController.swift */; };
-		B2A96D5D2E33078200D23ECF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B2A96D5C2E33078200D23ECF /* Base */; };
 		B2A96D5F2E33078600D23ECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2A96D5E2E33078600D23ECF /* Assets.xcassets */; };
 		B2A96D622E33078600D23ECF /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B2A96D612E33078600D23ECF /* Base */; };
+		B2A96D6B2E330A8100D23ECF /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A96D6A2E330A8100D23ECF /* Color+Extensions.swift */; };
+		B2A96D6D2E330B4D00D23ECF /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A96D6C2E330B4D00D23ECF /* Image+Extensions.swift */; };
+		B2A96D712E3312B500D23ECF /* SetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A96D702E3312B500D23ECF /* SetsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B28B6A8C2E33216C000DA55D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B28B6A8D2E332191000DA55D /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B2A96D522E33078100D23ECF /* Dexdeck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dexdeck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A96D552E33078100D23ECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2A96D572E33078100D23ECF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B2A96D592E33078100D23ECF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B2A96D5C2E33078200D23ECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B2A96D5E2E33078600D23ECF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2A96D612E33078600D23ECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B2A96D632E33078600D23ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2A96D6A2E330A8100D23ECF /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		B2A96D6C2E330B4D00D23ECF /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
+		B2A96D702E3312B500D23ECF /* SetsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +63,43 @@
 		B2A96D542E33078100D23ECF /* Dexdeck */ = {
 			isa = PBXGroup;
 			children = (
+				B2A96D6E2E33127A00D23ECF /* Views */,
+				B2A96D692E330A6500D23ECF /* Extesions */,
 				B2A96D552E33078100D23ECF /* AppDelegate.swift */,
 				B2A96D572E33078100D23ECF /* SceneDelegate.swift */,
 				B2A96D592E33078100D23ECF /* ViewController.swift */,
-				B2A96D5B2E33078200D23ECF /* Main.storyboard */,
 				B2A96D5E2E33078600D23ECF /* Assets.xcassets */,
 				B2A96D602E33078600D23ECF /* LaunchScreen.storyboard */,
 				B2A96D632E33078600D23ECF /* Info.plist */,
+				B28B6A8C2E33216C000DA55D /* README.md */,
+				B28B6A8D2E332191000DA55D /* LICENSE */,
 			);
 			path = Dexdeck;
+			sourceTree = "<group>";
+		};
+		B2A96D692E330A6500D23ECF /* Extesions */ = {
+			isa = PBXGroup;
+			children = (
+				B2A96D6A2E330A8100D23ECF /* Color+Extensions.swift */,
+				B2A96D6C2E330B4D00D23ECF /* Image+Extensions.swift */,
+			);
+			path = Extesions;
+			sourceTree = "<group>";
+		};
+		B2A96D6E2E33127A00D23ECF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B2A96D6F2E33128200D23ECF /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B2A96D6F2E33128200D23ECF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B2A96D702E3312B500D23ECF /* SetsCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +160,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B28B6A8E2E332191000DA55D /* LICENSE in Resources */,
 				B2A96D5F2E33078600D23ECF /* Assets.xcassets in Resources */,
 				B2A96D622E33078600D23ECF /* Base in Resources */,
-				B2A96D5D2E33078200D23ECF /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,22 +174,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2A96D5A2E33078100D23ECF /* ViewController.swift in Sources */,
+				B2A96D712E3312B500D23ECF /* SetsCollectionViewCell.swift in Sources */,
+				B2A96D6D2E330B4D00D23ECF /* Image+Extensions.swift in Sources */,
 				B2A96D562E33078100D23ECF /* AppDelegate.swift in Sources */,
 				B2A96D582E33078100D23ECF /* SceneDelegate.swift in Sources */,
+				B2A96D6B2E330A8100D23ECF /* Color+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B2A96D5B2E33078200D23ECF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B2A96D5C2E33078200D23ECF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B2A96D602E33078600D23ECF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -297,7 +327,6 @@
 				INFOPLIST_FILE = Dexdeck/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -325,7 +354,6 @@
 				INFOPLIST_FILE = Dexdeck/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
