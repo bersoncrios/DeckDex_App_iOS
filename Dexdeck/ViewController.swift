@@ -28,6 +28,15 @@ class ViewController: UIViewController {
         return label
     }()
     
+    private lazy var pokedexSectionTitleLable: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.text = "TCG POKEDEX"
+        label.textColor = .textColor
+        return label
+    }()
+    
     
     //COLLECTIONS VIEWS
     private lazy var setCollectionView: UICollectionView = {
@@ -41,6 +50,15 @@ class ViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(SetsCollectionViewCell.self, forCellWithReuseIdentifier: SetsCollectionViewCell.indentifier)
         return collectionView
+    }()
+    
+    private lazy var pookedexCardTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.dataSource = self
+        tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: PokemonTableViewCell.indentifier)
+        return tableView
     }()
     
     override func viewDidLoad() {
@@ -57,6 +75,8 @@ class ViewController: UIViewController {
         view.addSubview(backgroundView)
         view.addSubview(setSectionTitleLable)
         view.addSubview(setCollectionView)
+        view.addSubview(pokedexSectionTitleLable)
+        view.addSubview(pookedexCardTableView)
     }
     
     private func setupConstraints(){
@@ -79,10 +99,25 @@ class ViewController: UIViewController {
             setCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             setCollectionView.heightAnchor.constraint(equalToConstant: 120),
         ])
+        
+        NSLayoutConstraint.activate([
+            pokedexSectionTitleLable.topAnchor.constraint(equalTo: setCollectionView.bottomAnchor, constant: 45),
+            pokedexSectionTitleLable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 28),
+            pokedexSectionTitleLable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -28),
+        ])
+        
+        NSLayoutConstraint.activate([
+            pookedexCardTableView.topAnchor.constraint(equalTo: pokedexSectionTitleLable.bottomAnchor, constant: 20),
+            pookedexCardTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            pookedexCardTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            pookedexCardTableView.heightAnchor.constraint(equalToConstant: 300),
+
+        ])
     }
 
 }
 
+//MARK: Collection Data Source
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
@@ -90,6 +125,18 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SetsCollectionViewCell.indentifier, for: indexPath)
+        return cell
+    }
+}
+
+//MARK: Table View Data Source
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PokemonTableViewCell.indentifier, for: indexPath )
         return cell
     }
     
