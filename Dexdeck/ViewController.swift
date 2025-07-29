@@ -61,9 +61,33 @@ class ViewController: UIViewController {
         return tableView
     }()
     
+    private let service = Service()
+    private var tcgResponse: TCGResponse?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        fetchData()
+    }
+    
+    private func fetchData() {
+        service.fetchAllCards { [weak self] response in
+            self?.tcgResponse = response
+            DispatchQueue.main.async {
+                self?.loadData()
+            }
+        }
+    }
+    
+    private func loadData() {
+        if let response = tcgResponse {
+            print(response)
+            DispatchQueue.main.async {
+                self.pookedexCardTableView.reloadData()
+            }
+        } else {
+            print("tcgResponse é nil")
+        }
     }
     
     private func setupView(){
@@ -111,10 +135,10 @@ class ViewController: UIViewController {
             pookedexCardTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             pookedexCardTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             pookedexCardTableView.heightAnchor.constraint(equalToConstant: 300),
-
+            
         ])
     }
-
+    
 }
 
 //MARK: Collection Data Source
@@ -132,11 +156,21 @@ extension ViewController: UICollectionViewDataSource {
 //MARK: Table View Data Source
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return tcgResponse?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PokemonTableViewCell.indentifier, for: indexPath )
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonTableViewCell.indentifier,
+                                                       for: indexPath) as? PokemonTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let pokedex = tcgResponse?.data[indexPath.row]
+        cell.loadDataToScreen(
+            name: pokedex?.name,
+            cardHp: pokedex?.hp
+        )
+        
         return cell
     }
     

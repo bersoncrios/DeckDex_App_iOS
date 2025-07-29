@@ -84,8 +84,8 @@ class SetsCollectionViewCell: UICollectionViewCell {
             
             setIcon.heightAnchor.constraint(equalToConstant: 11),
             
-            setLogo.heightAnchor.constraint(equalToConstant: 15),
-            setLogo.widthAnchor.constraint(equalToConstant: 75)
+            setLogo.heightAnchor.constraint(equalToConstant: 15)
+
         ])
     }
 }
