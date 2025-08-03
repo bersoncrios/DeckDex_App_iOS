@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.text = "TCG SETS"
+        label.text = "TCG Coleções"
         label.textColor = .textColor
         return label
     }()
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.text = "TCG POKEDEX"
+        label.text = "TCG Cartas"
         label.textColor = .textColor
         return label
     }()
@@ -63,11 +63,13 @@ class ViewController: UIViewController {
     
     private let service = Service()
     private var tcgResponse: TCGResponse?
+    private var tcgColecoes: TCGColecoes?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         fetchData()
+        fetchColecoesData()
     }
     
     private func fetchData() {
@@ -79,14 +81,33 @@ class ViewController: UIViewController {
         }
     }
     
+    private func fetchColecoesData() {
+        service.fetchAllColecoes{ [weak self] response in
+            self?.tcgColecoes = response
+            DispatchQueue.main.async {
+                self?.loadColecoesData()
+            }
+        }
+    }
+    
+    
     private func loadData() {
         if let response = tcgResponse {
-            print(response)
             DispatchQueue.main.async {
                 self.pookedexCardTableView.reloadData()
             }
         } else {
             print("tcgResponse é nil")
+        }
+    }
+    
+    private func loadColecoesData() {
+        if let response = tcgColecoes {
+            DispatchQueue.main.async {
+                self.setCollectionView.reloadData()
+            }
+        } else {
+            print("tcgColecoes é nil")
         }
     }
     
@@ -144,11 +165,20 @@ class ViewController: UIViewController {
 //MARK: Collection Data Source
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return tcgColecoes?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SetsCollectionViewCell.indentifier, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SetsCollectionViewCell.indentifier,
+                                                            for: indexPath) as? SetsCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        let sets = tcgColecoes?.data[indexPath.row]
+        cell.loadDataSets(
+            name: sets?.name,
+            icon: sets?.images.symbol,
+            logo: sets?.images.logo)
         return cell
     }
 }
@@ -173,6 +203,4 @@ extension ViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    
 }

@@ -33,7 +33,6 @@ class SetsCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .textColor
-        label.text = "Sword and Shield"
         label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         label.textAlignment = .center
         return label
@@ -65,7 +64,30 @@ class SetsCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func loadDataSets(name: String?, icon: String?, logo: String?) {
+        setNameLabel.text = name
 
+        if let iconURL = icon, let url = URL(string: iconURL) {
+            URLSession.shared.dataTask(with: url) { data, _, _ in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        self.setIcon.image = UIImage(data: data)
+                    }
+                }
+            }.resume()
+        }
+
+        if let logoURL = logo, let url = URL(string: logoURL) {
+            URLSession.shared.dataTask(with: url) { data, _, _ in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        self.setLogo.image = UIImage(data: data)
+                    }
+                }
+            }.resume()
+        }
+    }
     private func setupView() {
         setHierarchy()
         setConstraints()

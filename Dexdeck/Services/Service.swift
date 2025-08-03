@@ -9,10 +9,12 @@ import Foundation
 
 class Service {
     private let baseURL: String = "https://api.pokemontcg.io/v2/"
-       private let apiKey: String = "API_KEY"
-       private let session = URLSession.shared
+    private let apiKey: String = "4d1d51bc-85fb-4bd7-83ee-04d2376575e5"
+    private let session = URLSession.shared
+    
     
     func fetchAllCards(_ completion: @escaping (TCGResponse?) -> Void) {
+       
         let urlString = "\(baseURL)cards?page=1&pageSize=50"
         guard let url = URL(string: urlString) else { return }
         
@@ -30,6 +32,39 @@ class Service {
             do {
                 let TCGResponse = try JSONDecoder().decode(TCGResponse.self, from: data)
                 completion(TCGResponse)
+            } catch {
+                print("❌ Erro ao decodificar:", error)
+                if let jsonStr = String(data: data, encoding: .utf8) {
+                    print("📦 JSON recebido:\n\(jsonStr)")
+                }
+                completion(nil)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    
+    func fetchAllColecoes(_ completion: @escaping (TCGColecoes?) -> Void) {
+        let configuration = URLSessionConfiguration.default
+        
+        let urlString = "\(baseURL)sets?page=1&pageSize=50"
+        guard let url = URL(string: urlString) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue(apiKey, forHTTPHeaderField: "X-Api-Key")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            guard let data else {
+                completion(nil)
+                return
+            }
+            
+            do {
+                let TCGColecoes = try JSONDecoder().decode(TCGColecoes.self, from: data)
+                completion(TCGColecoes)
             } catch {
                 print("❌ Erro ao decodificar:", error)
                 if let jsonStr = String(data: data, encoding: .utf8) {
@@ -126,10 +161,38 @@ struct Cardmarket: Codable {
     let prices: [String: Double]
 }
 
-enum UpdatedAt: String, Codable {
-    case the20230327 = "2023/03/27"
-    case the20250729 = "2025/07/29"
+struct UpdatedAt: Codable {
+    let date: Date
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let dateString = try container.decode(String.self)
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        guard let date = formatter.date(from: dateString) else {
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(dateString)")
+        }
+        
+        self.date = date
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        let dateString = formatter.string(from: date)
+        try container.encode(dateString)
+    }
 }
+
 
 // MARK: - Set
 struct SetPokede: Codable {
@@ -239,3 +302,33 @@ struct The1_StEditionHolofoil: Codable {
     let low, mid, high: Double
     let market, directLow: Double?
 }
+
+
+
+
+// MARK: - TCGSets
+struct TCGColecoes: Codable {
+    let data: [ColecoesData]
+    let page, pageSize, count, totalCount: Int
+}
+
+// MARK: - Datum
+struct ColecoesData: Codable {
+    let id, name, series: String
+    let printedTotal, total: Int
+    let legalities: ColecoesLegalities
+    let ptcgoCode: String?
+    let releaseDate, updatedAt: String
+    let images: Images
+}
+
+// MARK: - Images
+struct Images: Codable {
+    let symbol, logo: String
+}
+
+// MARK: - Legalities
+struct ColecoesLegalities: Codable {
+    let unlimited: String
+}
+
